@@ -1,5 +1,11 @@
 [gd_scene format=3 uid="uid://d2675pyoxtdwm"]
 
+[ext_resource type="Script" uid="uid://bjmg1fwjborp5" path="res://character_body_3d.gd" id="1_a202f"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vq7pl"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_llox3"]
+
 [node name="Node3D" type="Node3D" unique_id=1362355674]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1469877390]
@@ -7,3 +13,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.008625984, -0.009497881, -
 lod_bias = 0.001
 use_collision = true
 size = Vector3(10, 0.1, 10)
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1832401127]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2797873, 0)
+script = ExtResource("1_a202f")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D" unique_id=596934796]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9245068, 0)
+mesh = SubResource("CapsuleMesh_vq7pl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=2047407326]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.467668, 0)
+shape = SubResource("CapsuleShape3D_llox3")
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D" unique_id=534184432]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.045435, 0)
