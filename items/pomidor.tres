@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://ce4e5jabqvfih"]
+
+[ext_resource type="Texture2D" uid="uid://bbxwir31llxtf" path="res://items/tomato.png" id="1_j0c6l"]
+[ext_resource type="Script" uid="uid://bbdamna0yidho" path="res://item_data.gd" id="2_4i76p"]
+
+[resource]
+script = ExtResource("2_4i76p")
+name = "Pomidor"
+icon = ExtResource("1_j0c6l")
+sell_price = 10
+metadata/_custom_type_script = "uid://bbdamna0yidho"

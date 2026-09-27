@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cfdxe1rbdtrdw"]
+
+[ext_resource type="Script" uid="uid://cmwrrfyg86qhp" path="res://world_item.gd" id="1_rh40i"]
+[ext_resource type="Resource" uid="uid://ce4e5jabqvfih" path="res://items/pomidor.tres" id="2_gjm21"]
+[ext_resource type="PackedScene" uid="uid://b1d6ni4nahy1k" path="res://assets/tomato_tier1.glb" id="3_gbg4m"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vq7pl"]
+size = Vector3(1.4049072, 1.4750977, 1)
+
+[node name="Tomato" type="RigidBody3D" unique_id=1971789624]
+script = ExtResource("1_rh40i")
+item_data = ExtResource("2_gjm21")
+
+[node name="tomato_tier1" parent="." unique_id=1074771472 instance=ExtResource("3_gbg4m")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=294905158]
+shape = SubResource("BoxShape3D_vq7pl")

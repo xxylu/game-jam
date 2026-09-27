@@ -2,20 +2,22 @@
 
 [ext_resource type="Texture2D" uid="uid://bwm86gfpccnm1" path="res://items/Grass004_2K-JPG_Color.jpg" id="1_4arys"]
 [ext_resource type="Script" uid="uid://bjmg1fwjborp5" path="res://character_body_3d.gd" id="1_a202f"]
-[ext_resource type="Script" path="res://world_item.gd" id="2_noarx"]
+[ext_resource type="Script" uid="uid://cmwrrfyg86qhp" path="res://world_item.gd" id="2_noarx"]
 [ext_resource type="PackedScene" path="res://items/control.tscn" id="3_a0tk4"]
-[ext_resource type="Script" path="res://item_data.gd" id="4_jka67"]
+[ext_resource type="Script" uid="uid://bbdamna0yidho" path="res://item_data.gd" id="4_jka67"]
 [ext_resource type="PackedScene" path="res://items/hotbar.tscn" id="4_r3fl7"]
+[ext_resource type="Script" uid="uid://dpcjiqkyfyuii" path="res://control_money.gd" id="6_imku0"]
 [ext_resource type="PackedScene" uid="uid://dldpkpt586vw0" path="res://assets/shop.glb" id="7_6iypd"]
-[ext_resource type="Script" path="res://sklep.gd" id="8_cdqbm"]
+[ext_resource type="Texture2D" uid="uid://daqgcgsi3gmbn" path="res://items/coin.png" id="7_imku0"]
+[ext_resource type="Script" uid="uid://s8x4kcng3p28" path="res://sklep.gd" id="8_cdqbm"]
 [ext_resource type="PackedScene" uid="uid://b8sdmqscrxt85" path="res://assets/patch.glb" id="8_tereu"]
 [ext_resource type="PackedScene" uid="uid://crruyciml8uom" path="res://assets/water_Tank.glb" id="9_cdqbm"]
+[ext_resource type="Script" uid="uid://dhe0qffggy3w1" path="res://message_control.gd" id="10_3v7ru"]
 [ext_resource type="PackedScene" path="res://items/water_can.tscn" id="12_cdqbm"]
+[ext_resource type="PackedScene" uid="uid://cfdxe1rbdtrdw" path="res://items/pomidor.tscn" id="14_wlxy5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tereu"]
 albedo_texture = ExtResource("1_4arys")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cdqbm"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_vq7pl"]
 
@@ -38,8 +40,11 @@ metadata/_custom_type_script = "uid://bbdamna0yidho"
 script = ExtResource("4_jka67")
 metadata/_custom_type_script = "uid://bbdamna0yidho"
 
+[sub_resource type="LabelSettings" id="LabelSettings_tcnuu"]
+font_size = 18
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_imku0"]
-radius = 2.3320622
+radius = 3.6117582
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tereu"]
 energy_multiplier = 3.0
@@ -56,7 +61,6 @@ sky = SubResource("Sky_cdqbm")
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1469877390]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.636814, -0.009497881, -8.262518)
 material_override = SubResource("StandardMaterial3D_tereu")
-material_overlay = SubResource("StandardMaterial3D_cdqbm")
 lod_bias = 0.001
 use_collision = true
 size = Vector3(98.55844, 0.1, 102.57127)
@@ -64,6 +68,8 @@ size = Vector3(98.55844, 0.1, 102.57127)
 [node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1832401127 groups=["hotbar_group"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2797873, 0)
 script = ExtResource("1_a202f")
+water_can_scene = ExtResource("12_cdqbm")
+tomato_scene = ExtResource("14_wlxy5")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D" unique_id=596934796]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9245068, 0)
@@ -81,6 +87,7 @@ target_position = Vector3(0, -1, -2.5)
 
 [node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=1469235410]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3305664, 0, 0)
+visible = false
 script = ExtResource("2_noarx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=1927124131]
@@ -96,6 +103,48 @@ item_lopata = SubResource("Resource_3deg4")
 item_nawoz = SubResource("Resource_ivw8y")
 item_wiadro = SubResource("Resource_nkd6v")
 
+[node name="ControlMoney" type="Control" parent="CanvasLayer" unique_id=738643494 groups=["money_ui"]]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_imku0")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/ControlMoney" unique_id=519256402]
+layout_mode = 0
+offset_left = 1002.0
+offset_top = 38.0
+offset_right = 1132.0
+offset_bottom = 108.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ControlMoney/HBoxContainer" unique_id=550992717]
+layout_mode = 2
+texture = ExtResource("7_imku0")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/ControlMoney/HBoxContainer" unique_id=342833435]
+layout_mode = 2
+text = "0"
+
+[node name="MessageControl" type="Control" parent="CanvasLayer" unique_id=358446463 groups=["message_ui", "money_ui"]]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("10_3v7ru")
+
+[node name="MessageLabel" type="Label" parent="CanvasLayer/MessageControl" unique_id=275657401]
+layout_mode = 0
+offset_left = 436.0
+offset_top = 45.0
+offset_right = 476.0
+offset_bottom = 68.0
+label_settings = SubResource("LabelSettings_tcnuu")
+
+[node name="Timer" type="Timer" parent="CanvasLayer/MessageControl" unique_id=1879347309]
+wait_time = 3.0
+one_shot = true
+
 [node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1827801252]
 
 [node name="Hotbar" parent="CanvasLayer2" unique_id=154348853 instance=ExtResource("4_r3fl7")]
@@ -107,7 +156,7 @@ transform = Transform3D(-0.00072433724, 0, 0.49999946, 0, 0.5, 0, -0.49999946, 0
 script = ExtResource("8_cdqbm")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="shop/StaticBody3D" unique_id=241083485]
-transform = Transform3D(1.0000008, 0, 0, 0, 1, 0, 0, 0, 1.0000008, -1.0885792, -3.5261478, 10.886257)
+transform = Transform3D(1.0000011, 0, 0, 0, 1, 0, 0, 0, 1.0000011, 0.041908264, -3.5261478, 12.199989)
 shape = SubResource("SphereShape3D_imku0")
 
 [node name="patch2" parent="." unique_id=1485302328 instance=ExtResource("8_tereu")]
@@ -126,7 +175,7 @@ transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -12.333763, 1.9966226, 
 environment = SubResource("Environment_imku0")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2039555849]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30.249407, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 53.855064, 0)
 light_color = Color(1, 1, 0.79607844, 1)
 light_energy = 7.0
 light_indirect_energy = 4.101
@@ -136,3 +185,6 @@ light_specular = 0.525
 
 [node name="water can" parent="." unique_id=475607022 instance=ExtResource("12_cdqbm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.869751, 0.58185434, 4.8171225)
+
+[node name="Tomato" parent="." unique_id=1971789624 instance=ExtResource("14_wlxy5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.1794205, 0.65494645, -5.3957424)

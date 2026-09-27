@@ -13,9 +13,12 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var raycast = $Camera3D/RayCast3D
 
 @export var water_can_scene: PackedScene
+@export var tomato_scene: PackedScene
 # Pasek narzędzi - 7 pustych miejsc
 var inventory: Array[ItemData] = [null, null, null, null, null, null, null]
 var active_slot: int = 0 # Aktualnie wybrany slot (od 0 do 6)
+
+var money: int = 0
 
 func _ready():
 	# Ukrywa kursor myszy i "więzi" go w oknie gry zaraz po jej uruchomieniu
@@ -33,7 +36,7 @@ func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.keycode >= KEY_1 and event.keycode <= KEY_7:
 			active_slot = event.keycode - KEY_1
-			print("Wybrano slot: ", active_slot + 1)
+			show_message("Wybrano slot: " + str(active_slot + 1))
 
 	# 3. Lewy Przycisk Myszy (LPM) - Używanie 
 	# (zamieniłem na event, aby używało się tylko raz przy kliknięciu, a nie co klatkę)
@@ -47,6 +50,7 @@ func _input(event):
 	# 5. Klawisz Q - Wyrzucanie
 	if Input.is_action_just_pressed("drop"): 
 		drop_active_item()
+	
 
 
 func _physics_process(delta):
@@ -110,17 +114,17 @@ func try_pickup_item():
 			for i in range(inventory.size()):
 				if inventory[i] == null:
 					inventory[i] = item_to_add
-					print("Podniesiono: ", item_to_add.name)
+					show_message("Podniesiono: " + item_to_add.name)
 					object_hit.queue_free()
 					update_ui()
 					return
 
-			print("Ekwipunek jest pełny!")
+			show_message("Ekwipunek jest pełny!")
 
 		elif object_hit.has_method("interact"):
 			object_hit.interact()
 	else:
-		print("Raycast w nic nie trafia")
+		show_message("Raycast w nic nie trafia")
 '''		
 func drop_active_item():
 	var current_item = inventory[active_slot]
@@ -136,26 +140,48 @@ func drop_active_item():
 		inventory[active_slot] = null 
 '''
 
+func sell_active_item():
+	var item = inventory[active_slot]
+
+	if item == null:
+		show_message("Nie masz nic w wybranym slocie")
+		return
+
+	if item.sell_price <= 0:
+		show_message("Tego przedmiotu nie można sprzedać")
+		return
+
+	add_money(item.sell_price)
+
+	show_message("Sprzedano " + str(item.name) + " za " + str(item.sell_price))
+
+	inventory[active_slot] = null
+	update_ui()
+	
 func drop_active_item():
 	var current_item = inventory[active_slot]
 
 	if current_item == null:
 		return
 
+	var dropped_item: RigidBody3D = null
+
 	if current_item.name == "Wiadro":
-		var dropped_item = water_can_scene.instantiate() as RigidBody3D
+		dropped_item = water_can_scene.instantiate() as RigidBody3D
 
-		get_tree().current_scene.add_child(dropped_item)
+	elif current_item.name == "Pomidor":
+		dropped_item = tomato_scene.instantiate() as RigidBody3D
 
-		var drop_position = camera.global_position - camera.global_transform.basis.z * 1.5
-		dropped_item.global_position = drop_position
+	if dropped_item == null:
+		return
 
-		dropped_item.linear_velocity = -camera.global_transform.basis.z * 3.0
+	get_tree().current_scene.add_child(dropped_item)
 
-		inventory[active_slot] = null
-		update_ui()
+	var drop_position = camera.global_position - camera.global_transform.basis.z * 1.5
+	dropped_item.global_position = drop_position
 
-		print("Wyrzucono konewkę")
+	inventory[active_slot] = null
+	update_ui()
 		
 func use_active_item():
 	var item = inventory[active_slot]
@@ -163,10 +189,10 @@ func use_active_item():
 		return
 		
 	if item.type == 0: 
-		print("Zjadłeś: ", item.name, "! Odzyskujesz zdrowie.")
+		show_message("Zjadłeś: " + str(item.name) + "! Odzyskujesz zdrowie.")
 		inventory[active_slot] = null 
 	elif item.type == 1: 
-		print("Używasz narzędzia: ", item.name, "! Kopiesz ziemię.")
+		show_message("Używasz narzędzia: " + str(item.name) + "! Kopiesz ziemię.")
 
 func give_item(item_to_add: ItemData):
 	for i in range(inventory.size()):
@@ -176,7 +202,18 @@ func give_item(item_to_add: ItemData):
 			update_ui() # <--- Ta linijka jest kluczowa!
 			return
 	
-	print("Nie można dodać z DevMenu - Ekwipunek jest pełny!")
+	show_message("Nie można dodać z DevMenu - Ekwipunek jest pełny!")
 
 func update_ui():
 	get_tree().call_group("hotbar_group", "update_hotbar", inventory, active_slot)
+	
+func add_money(amount: int):
+	money += amount
+	update_money_ui()
+	show_message("Masz teraz " + str(money) + " coinów")
+
+func update_money_ui():
+	get_tree().call_group("money_ui", "update_money", money)
+	
+func show_message(text: String):
+	get_tree().call_group("message_ui", "show_message", text)
