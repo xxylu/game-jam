@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://mnq205761xww"]
+
+[ext_resource type="Script" uid="uid://bfht5jpff1ilu" path="res://items/control.gd" id="1_g3unv"]
+
+[node name="Control" type="Control" unique_id=1772853165]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g3unv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=28145382]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="AddLopata" type="Button" parent="VBoxContainer" unique_id=1370201983]
+layout_mode = 2
+text = "Dodaj Łopatę"
+
+[node name="AddWiadro" type="Button" parent="VBoxContainer" unique_id=1951851512]
+layout_mode = 2
+text = "Dodaj Wiadro"
+
+[node name="AddNawoz" type="Button" parent="VBoxContainer" unique_id=1975098236]
+layout_mode = 2
+text = "Dodaj nawóz"
+
+[connection signal="pressed" from="VBoxContainer/AddLopata" to="." method="_on_add_lopata_pressed"]
+[connection signal="pressed" from="VBoxContainer/AddWiadro" to="." method="_on_add_wiadro_pressed"]
+[connection signal="pressed" from="VBoxContainer/AddNawoz" to="." method="_on_add_nawoz_pressed"]

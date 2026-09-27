@@ -1,10 +1,28 @@
 [gd_scene format=3 uid="uid://d2675pyoxtdwm"]
 
 [ext_resource type="Script" uid="uid://bjmg1fwjborp5" path="res://character_body_3d.gd" id="1_a202f"]
+[ext_resource type="Script" uid="uid://cmwrrfyg86qhp" path="res://world_item.gd" id="2_noarx"]
+[ext_resource type="PackedScene" uid="uid://mnq205761xww" path="res://items/control.tscn" id="3_a0tk4"]
+[ext_resource type="Script" uid="uid://bbdamna0yidho" path="res://item_data.gd" id="4_jka67"]
+[ext_resource type="PackedScene" uid="uid://be8y5pq8ebll4" path="res://items/hotbar.tscn" id="4_r3fl7"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_vq7pl"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_llox3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vq7pl"]
+
+[sub_resource type="Resource" id="Resource_3deg4"]
+script = ExtResource("4_jka67")
+metadata/_custom_type_script = "uid://bbdamna0yidho"
+
+[sub_resource type="Resource" id="Resource_ivw8y"]
+script = ExtResource("4_jka67")
+metadata/_custom_type_script = "uid://bbdamna0yidho"
+
+[sub_resource type="Resource" id="Resource_nkd6v"]
+script = ExtResource("4_jka67")
+metadata/_custom_type_script = "uid://bbdamna0yidho"
 
 [node name="Node3D" type="Node3D" unique_id=1362355674]
 
@@ -14,7 +32,7 @@ lod_bias = 0.001
 use_collision = true
 size = Vector3(10, 0.1, 10)
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1832401127]
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1832401127 groups=["hotbar_group"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2797873, 0)
 script = ExtResource("1_a202f")
 
@@ -28,3 +46,25 @@ shape = SubResource("CapsuleShape3D_llox3")
 
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D" unique_id=534184432]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.045435, 0)
+
+[node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D/Camera3D" unique_id=872325082]
+target_position = Vector3(0, -1, -2.5)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=1469235410]
+script = ExtResource("2_noarx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=1927124131]
+shape = SubResource("BoxShape3D_vq7pl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=1680277022]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=812535242]
+
+[node name="Control" parent="CanvasLayer" unique_id=1772853165 instance=ExtResource("3_a0tk4")]
+item_lopata = SubResource("Resource_3deg4")
+item_nawoz = SubResource("Resource_ivw8y")
+item_wiadro = SubResource("Resource_nkd6v")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1827801252]
+
+[node name="Hotbar" parent="CanvasLayer2" unique_id=154348853 instance=ExtResource("4_r3fl7")]

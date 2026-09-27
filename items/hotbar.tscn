@@ -1,0 +1,126 @@
+[gd_scene format=3 uid="uid://be8y5pq8ebll4"]
+
+[ext_resource type="Script" uid="uid://bnlctltad7wk" path="res://items/hotbar.gd" id="1_3deg4"]
+
+[sub_resource type="Gradient" id="Gradient_xdpmb"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gipiu"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kps7b"]
+noise = SubResource("FastNoiseLite_gipiu")
+color_ramp = SubResource("Gradient_xdpmb")
+
+[node name="Hotbar" type="Control" unique_id=154348853 groups=["hotbar_group"]]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_3deg4")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1826203957]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+alignment = 1
+
+[node name="Slot" type="Panel" parent="HBoxContainer" unique_id=875321947]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Slot" unique_id=931683042]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_kps7b")
+expand_mode = 1
+
+[node name="Slot2" type="Panel" parent="HBoxContainer" unique_id=2080285194]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Slot2" unique_id=2081527724]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_kps7b")
+expand_mode = 1
+
+[node name="Slot3" type="Panel" parent="HBoxContainer" unique_id=1253327250]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Slot3" unique_id=837252279]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_kps7b")
+expand_mode = 1
+
+[node name="Slot4" type="Panel" parent="HBoxContainer" unique_id=1518096912]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Slot4" unique_id=839783051]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_kps7b")
+expand_mode = 1
+
+[node name="Slot5" type="Panel" parent="HBoxContainer" unique_id=317795096]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Slot5" unique_id=1479306950]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_kps7b")
+expand_mode = 1
+
+[node name="Slot6" type="Panel" parent="HBoxContainer" unique_id=1711388557]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Slot6" unique_id=2998809]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_kps7b")
+expand_mode = 1
+
+[node name="Slot7" type="Panel" parent="HBoxContainer" unique_id=363799204]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Slot7" unique_id=1376942694]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_kps7b")
+expand_mode = 1

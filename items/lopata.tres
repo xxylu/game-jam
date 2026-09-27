@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://8v1gf8mhsytj"]
+
+[ext_resource type="Script" uid="uid://bbdamna0yidho" path="res://item_data.gd" id="1_kps7b"]
+
+[sub_resource type="Gradient" id="Gradient_ipyoe"]
+offsets = PackedFloat32Array(0.9969231, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vtbif"]
+frequency = 0.0001
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ndvl2"]
+noise = SubResource("FastNoiseLite_vtbif")
+color_ramp = SubResource("Gradient_ipyoe")
+
+[resource]
+script = ExtResource("1_kps7b")
+name = "Łopata"
+icon = SubResource("NoiseTexture2D_ndvl2")
+metadata/_custom_type_script = "uid://bbdamna0yidho"

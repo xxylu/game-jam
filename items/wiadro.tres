@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://cb8j3ssko8wyv"]
+
+[ext_resource type="Script" uid="uid://bbdamna0yidho" path="res://item_data.gd" id="1_vtbif"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ivw8y"]
+
+[resource]
+script = ExtResource("1_vtbif")
+name = "Wiadro"
+icon = SubResource("NoiseTexture2D_ivw8y")
+metadata/_custom_type_script = "uid://bbdamna0yidho"
