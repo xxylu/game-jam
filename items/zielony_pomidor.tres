@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://dnfk2nfgqksd"]
+
+[ext_resource type="Script" uid="uid://bbdamna0yidho" path="res://item_data.gd" id="1_h6fqb"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3deg4"]
+
+[resource]
+script = ExtResource("1_h6fqb")
+name = "Zielony Pomidor"
+icon = SubResource("NoiseTexture2D_3deg4")
+metadata/_custom_type_script = "uid://bbdamna0yidho"

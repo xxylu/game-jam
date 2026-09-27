@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://ce8u5yr8f86ok"]
+
+[ext_resource type="Script" uid="uid://cmwrrfyg86qhp" path="res://world_item.gd" id="1_bbjja"]
+[ext_resource type="Resource" uid="uid://cb8j3ssko8wyv" path="res://items/wiadro.tres" id="2_1b6wa"]
+[ext_resource type="PackedScene" uid="uid://cuqwprqji28hq" path="res://assets/water_can.glb" id="3_1b6wa"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vq7pl"]
+size = Vector3(1.6240234, 1.4750977, 1)
+
+[node name="water_can2" type="RigidBody3D" unique_id=1996749346]
+script = ExtResource("1_bbjja")
+item_data = ExtResource("2_1b6wa")
+
+[node name="water_can3" parent="." unique_id=2221591 instance=ExtResource("3_1b6wa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.944186, 0, -4.1626053)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=395182103]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11669922, 0.23754883, 0)
+shape = SubResource("BoxShape3D_vq7pl")
